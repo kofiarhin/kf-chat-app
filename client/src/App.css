@@ -1,38 +1,129 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.heading {
+  font-size: 2rem;
+  margin: 2rem 0rem;
   text-align: center;
+  font-weight: 500;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.error {
+  color: red;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.text-info {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.form-wrapper {
+  width: 800px;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.form-wrapper input,
+.form-wrapper textarea,
+.form-wrapper button {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.form-wrapper textarea {
+  height: auto;
+  text-indent: 20px;
+  padding-top: 10px;
+}
+
+.form-wrapper input {
+  padding: 0.5rem;
+  text-indent: 10px;
+}
+
+.form-wrapper label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.form-wrapper button {
+  background-color: #097631;
   color: white;
+  padding: 1rem 0rem;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.chat-wrapper {
+  width: 800px;
+  max-width: 90%;
+  margin: 0 auto 20px;
+  height: 60vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -ms-overflow-style: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.chat-wrapper p {
+  font-size: 1.4rem;
+  margin-bottom: 1.4rem;
+  color: #ff6600;
+  font-weight: 600;
+  font-size: 1.6rem;
+  scroll-snap-align: end;
+}
+
+.chat-wrapper p.you {
+  color: #097631;
+}
+.chat-wrapper span {
+  text-transform: capitalize;
+}
+
+.chat-input-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+.leave {
+  cursor: pointer;
+  background-color: #ff6600;
+  border: none;
+  color: white;
+  padding: 1rem;
+}
+.info {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* media queries */
+
+@media (max-width: 800px) {
+  .heading {
+    font-size: 1.8rem;
   }
-  to {
-    transform: rotate(360deg);
+  .form-wrapper button {
+    font-size: 1rem;
+  }
+
+  .header-wrapper .heading {
+    font-size: 1.2rem;
   }
 }
