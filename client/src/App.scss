@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.heading {
+  font-size: 2rem;
+  margin: 2rem 0rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.text-info {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  &.center {
+    text-align: center;
+  }
+}
+
+.text {
+  font-size: 1.2rem;
+  &.center {
+    text-align: center;
+  }
+}
+
+// form wrapper
+
+.form-wrapper {
+  width: 800px;
+  max-width: 90%;
+  margin: 0 auto;
+
+  textarea {
+    height: auto;
+    text-indent: 20px;
+    padding-top: 10px;
+  }
+
+  input {
+    padding: 0.5rem;
+    text-indent: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  button {
+    background-color: #097631;
+    color: white;
+    padding: 1rem 0rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+}
+
+.form-wrapper input,
+.form-wrapper textarea,
+.form-wrapper button {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+.leave {
+  cursor: pointer;
+  background-color: #ff6600;
+  border: none;
+  color: white;
+  padding: 1rem;
+}
+
+/* media queries */
+
+@media (max-width: 800px) {
+  .heading {
+    font-size: 1.8rem;
+  }
+  .form-wrapper button {
+    font-size: 1rem;
+  }
+
+  .header-wrapper .heading {
+    font-size: 1.2rem;
+  }
+}

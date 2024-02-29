@@ -1,13 +1,17 @@
-hint: You've added another git repository inside your current repository.
-hint: Clones of the outer repository will not contain the contents of
-hint: the embedded repository and will not know how to obtain it.
-hint: If you meant to add a submodule, use:
-hint: 
-hint:   git submodule add <url> client
-hint: 
-hint: If you added this path by mistake, you can remove it from the
-hint: index with:
-hint: 
-hint:   git rm --cached client
-hint: 
-hint: See "git help submodule" for more information.
+
+
+
+Check out a simple  Real-Time Chat App I created
+https://kf-chat-app.onrender.com/
+
+Tech Stack:
+
+Node.js
+Express.js
+Socket.io
+React Js
+
+Contributions welcome on GitHub. Let's chat away!
+https://github.com/kofiarhin/kf-chat-app/tree/master
+
+#ChatAppLaunch #TechInnovation #NodeJS #SocketIO #WebDev #nodejs #fullstack #frontend #backend

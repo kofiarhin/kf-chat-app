@@ -1,3 +1,4 @@
+import "./chat.styles.scss";
 import io from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";

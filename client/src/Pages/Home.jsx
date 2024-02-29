@@ -32,9 +32,7 @@ const Home = () => {
   return (
     <div>
       <h1 className="heading">E-Chat</h1>
-      <p className="text-info">
-        Just enter username and start talking to strangers
-      </p>
+      <p className="text center">Escape from the matrix</p>
       <div className="form-wrapper">
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Username</label>
@@ -48,6 +46,8 @@ const Home = () => {
           <p className="error"> {error} </p>
           <button type="submit">Enter Chat Room</button>
         </form>
+
+        <p className="text-info center">Created By Kofi Arhin </p>
       </div>
     </div>
   );

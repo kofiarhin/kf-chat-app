@@ -1,8 +1,8 @@
-import "./App.css";
+import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./Pages/Home";
-import Chat from "./Pages/Chat";
+import Chat from "./Pages/Chat/Chat";
 
 const App = () => {
   return (
