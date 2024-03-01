@@ -13,6 +13,7 @@ const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [counter, setCounter] = useState(0);
   const [info, setInfo] = useState("");
+  const [typingInfo, setTypingInfo] = useState("");
 
   useEffect(() => {}, []);
 
@@ -47,17 +48,13 @@ const ChatRoom = () => {
     });
 
     socket.on("is_typing", (data) => {
-      if (data !== username) {
-        setInfo(`${data} is typing...`);
+      setInfo(`${data} is typing...`);
 
-        setTimeout(() => {
-          setInfo("");
-        }, [8000]);
-      }
+      setTimeout(() => {
+        setInfo("");
+      }, 5000);
     });
   }, [socket]);
-
-  console.log(counter);
 
   const handleLeave = () => {
     localStorage.removeItem("username");
