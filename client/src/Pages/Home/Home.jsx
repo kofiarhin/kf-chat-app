@@ -6,7 +6,7 @@ import { socket } from "../../utils/helper";
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("username"));
   const navigate = useNavigate();
-  const [username, setUsername] = useState("esco");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -54,7 +54,10 @@ const Home = () => {
   };
   return (
     <div id="home">
-      <h1 className="heading">E-Chat</h1>
+      <div className="text-wrapper">
+        <h1 className="heading">E-Chat</h1>
+        <p className="text center">Escape the matrix</p>
+      </div>
       <div className="form-wrapper">
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Username</label>

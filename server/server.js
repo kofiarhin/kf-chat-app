@@ -25,6 +25,7 @@ let messages = [];
 let users = [];
 
 io.on("connection", (socket) => {
+  console.log(socket.id);
   io.emit("receive_message", messages);
 
   socket.on("check_user", (username) => {
@@ -36,18 +37,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join", (username) => {
-    console.log("new user just joined");
     users.push(username);
-    console.log(users);
     socket.broadcast.emit("new_user", username);
     io.emit("users", users);
   });
 
   socket.on("leave", (data) => {
-    console.log(data);
     // remove user from list of users
     users = users.filter((user) => user !== data);
-    console.log(users);
     socket.broadcast.emit("users", users);
     socket.broadcast.emit("user_left", data);
   });
@@ -55,6 +52,10 @@ io.on("connection", (socket) => {
   socket.on("send_message", (data) => {
     messages.push(data);
     io.emit("receive_message", messages);
+  });
+
+  socket.on("is_typing", (username) => {
+    io.emit("is_typing", username);
   });
 });
 

@@ -5,9 +5,11 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  .container {
+    padding: 2rem 0rem;
+  }
   header {
     display: flex;
-    padding: 1rem;
     justify-content: space-between;
     align-items: center;
 
