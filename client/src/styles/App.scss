@@ -1,9 +1,15 @@
+@import "./variables.scss";
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+.container {
+  width: 1200px;
+  max-width: 90%;
+  margin: 0 auto;
+}
 .heading {
   font-size: 2rem;
   margin: 2rem 0rem;
@@ -58,7 +64,7 @@
   }
 
   button {
-    background-color: #097631;
+    background-color: $primary;
     color: white;
     padding: 1rem 0rem;
     font-size: 1.2rem;

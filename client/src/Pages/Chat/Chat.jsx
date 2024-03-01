@@ -1,10 +1,7 @@
 import "./chat.styles.scss";
-import io from "socket.io-client";
+import { socket } from "../../utils/helper";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
-// const socket = io.connect("http://localhost:5000");
-const socket = io.connect("https://kf-chat-app.onrender.com/");
 
 const Chat = () => {
   const username = JSON.parse(localStorage.getItem("username"));
@@ -17,7 +14,9 @@ const Chat = () => {
   const [info, setInfo] = useState("");
 
   useEffect(() => {
-    socket.emit("join", username);
+    // socket.emit("join", username);
+
+    // focus on input field
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -50,6 +49,10 @@ const Chat = () => {
 
     socket.on("receive_message", (data) => {
       setMessages(data);
+    });
+
+    socket.on("users", (data) => {
+      console.log(data);
     });
   }, [socket]);
 

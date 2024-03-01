@@ -1,23 +1,39 @@
+import "./home.styles.scss";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { socket } from "../../utils/helper";
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("username"));
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("esco");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (user) {
-      navigate("/chat");
-    }
-  }, [user]);
+    // check if user already exist
+  }, [socket]);
 
   const handleChange = (e) => {
     setUsername(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const checkUser = async (username) => {
+    try {
+      const res = await fetch(`/checkUser`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({ username }),
+      });
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!username) {
@@ -25,14 +41,20 @@ const Home = () => {
       return;
     }
 
+    const { message } = await checkUser(username);
+
+    if (message) {
+      setError("user already exist");
+      return;
+    }
     setError("");
     localStorage.setItem("username", JSON.stringify(username));
-    navigate("/chat", { state: { username } });
+    socket.emit("join", username);
+    navigate("/chatroom");
   };
   return (
-    <div>
+    <div id="home">
       <h1 className="heading">E-Chat</h1>
-      <p className="text center">Escape from the matrix</p>
       <div className="form-wrapper">
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Username</label>
@@ -46,9 +68,8 @@ const Home = () => {
           <p className="error"> {error} </p>
           <button type="submit">Enter Chat Room</button>
         </form>
-
-        <p className="text-info center">Created By Kofi Arhin </p>
       </div>
+      <p className="text-info center">Created By Kofi Arhin </p>
     </div>
   );
 };
