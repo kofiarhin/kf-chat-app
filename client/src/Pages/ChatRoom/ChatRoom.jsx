@@ -18,6 +18,13 @@ const ChatRoom = () => {
   const [typingInfo, setTypingInfo] = useState("");
   const [showSideNav, setShowSideNav] = useState(false);
 
+  // runs once
+  useEffect(() => {
+    // check if user is logged in
+    const username = JSON.parse(localStorage.getItem("username"));
+    socket.emit("refresh_user", username);
+  }, []);
+
   useEffect(() => {}, []);
 
   useEffect(() => {

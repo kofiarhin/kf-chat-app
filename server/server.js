@@ -25,8 +25,16 @@ let messages = [];
 let users = [];
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
   io.emit("receive_message", messages);
+
+  socket.on("refresh_user", (username) => {
+    const check = users.includes(username);
+    if (!check) {
+      users.push(username);
+    }
+
+    socket.emit("users", users);
+  });
 
   socket.on("check_user", (username) => {
     const checkUser = users.find((user) => user === username);
