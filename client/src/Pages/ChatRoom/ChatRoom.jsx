@@ -1,8 +1,10 @@
 import "./chatRoom.styles.scss";
+import { IoMdSend, IoMdLogOut, IoMdMenu } from "react-icons/io";
 import { socket } from "../../utils/helper";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MessageList from "../../component/MessageList";
+import MessageList from "../../component/MessageList/MessageList";
+import SideNav from "../../component/SideNav/SideNav";
 
 const ChatRoom = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const ChatRoom = () => {
   const [counter, setCounter] = useState(0);
   const [info, setInfo] = useState("");
   const [typingInfo, setTypingInfo] = useState("");
+  const [showSideNav, setShowSideNav] = useState(false);
 
   useEffect(() => {}, []);
 
@@ -24,8 +27,7 @@ const ChatRoom = () => {
 
   useEffect(() => {
     socket.on("users", (data) => {
-      const numUsers = data.length;
-      setUsers(numUsers);
+      setUsers(data);
     });
 
     socket.on("receive_message", (data) => {
@@ -76,21 +78,40 @@ const ChatRoom = () => {
     socket.emit("send_message", { username, text });
     setText("");
   };
+
   return (
-    <div className="cnat-wrapper">
+    // chat-wrapper
+    <div className="chat-wrapper">
+      <SideNav
+        setShowSideNav={setShowSideNav}
+        showSideNav={showSideNav}
+        users={users}
+      />
       <div className="container">
-        <header>
-          <p>Users({users})</p>
+        <header className="header-wrapper">
+          {/* <p className="num-users">Users({users})</p> */}
+          <div className="icon-wraper">
+            <IoMdMenu
+              size={25}
+              onClick={() => setShowSideNav(true)}
+              className="menu-icon"
+            />
+          </div>
           {info && <p> {info} </p>}
-          <button onClick={handleLeave}> Logout</button>
+          <button onClick={handleLeave}>
+            Logout <IoMdLogOut />
+          </button>
         </header>
       </div>
 
+      {/* messages-wrapper */}
       <div className="message-wrapper">
         {messages.length > 0 && (
           <MessageList data={messages} username={username} />
         )}
       </div>
+
+      {/* input-wrapper */}
       <div className="input-wrapper">
         <form onSubmit={handleSubmit}>
           <div className="input-group">
@@ -100,7 +121,9 @@ const ChatRoom = () => {
               value={text}
               placeholder="type a message...."
             />
-            <button>Send</button>
+            <button>
+              <IoMdSend />
+            </button>
           </div>
         </form>
       </div>

@@ -12,7 +12,7 @@
 }
 .heading {
   font-size: 2rem;
-  margin: 2rem 0rem;
+  margin-bottom: 2rem;
   text-align: center;
   font-weight: 500;
 }
@@ -79,33 +79,4 @@
   margin-bottom: 1rem;
   width: 100%;
   font-size: 1.2rem;
-}
-
-.header-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-}
-.leave {
-  cursor: pointer;
-  background-color: #ff6600;
-  border: none;
-  color: white;
-  padding: 1rem;
-}
-
-/* media queries */
-
-@media (max-width: 800px) {
-  .heading {
-    font-size: 1.8rem;
-  }
-  .form-wrapper button {
-    font-size: 1rem;
-  }
-
-  .header-wrapper .heading {
-    font-size: 1.2rem;
-  }
 }
