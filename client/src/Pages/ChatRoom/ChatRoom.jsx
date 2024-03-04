@@ -1,5 +1,6 @@
 import "./chatRoom.styles.scss";
 import { IoMdSend, IoMdLogOut, IoMdMenu } from "react-icons/io";
+import { MdImage } from "react-icons/md";
 import { socket } from "../../utils/helper";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +9,8 @@ import SideNav from "../../component/SideNav/SideNav";
 import { logoutUser, reset, setUsers } from "../../redux/user/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { setMessages } from "../../redux/message/messageSlice";
+import ImageModal from "../../component/ImageModal/ImageModal";
+import { openModal } from "../../redux/Navigation/navigationSlice";
 
 const ChatRoom = () => {
   const navigate = useNavigate();
@@ -87,13 +90,14 @@ const ChatRoom = () => {
       return;
     }
 
-    socket.emit("send_message", { username, text });
+    socket.emit("send_message", { username, text, type: "text" });
     setText("");
   };
 
   return (
     // chat-wrapper
     <div className="chat-wrapper">
+      <ImageModal />
       <SideNav setShowSideNav={setShowSideNav} showSideNav={showSideNav} />
       <div className="container">
         <header className="header-wrapper">
@@ -113,7 +117,7 @@ const ChatRoom = () => {
       </div>
 
       {/* messages-wrapper */}
-      <div className="message-wrapper">
+      <div className="messages-wrapper">
         {messages.length > 0 && (
           <MessageList data={messages} username={username} />
         )}
@@ -121,6 +125,9 @@ const ChatRoom = () => {
 
       {/* input-wrapper */}
       <div className="input-wrapper">
+        <button onClick={() => dispatch(openModal())}>
+          <MdImage />
+        </button>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <input

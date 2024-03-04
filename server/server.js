@@ -64,6 +64,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
+    console.log(data);
     messages.push(data);
     io.emit("receive_message", messages);
   });

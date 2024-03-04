@@ -1,9 +1,16 @@
 @import "../../styles//variables.scss";
 
 .chat-wrapper {
+  .messages-wrapper {
+    padding: 100px 0px 150px 0px;
+  }
   .header-wrapper {
+    position: fixed;
     height: 100px;
+    z-index: 1000;
     height: 100px;
+    background-color: white;
+    padding: 0rem 2rem;
     top: 0;
     left: 0;
     right: 0;
@@ -32,6 +39,17 @@
     bottom: 0;
     right: 0;
     left: 0;
+    background-color: blue;
+    button {
+      width: 50px;
+      background-color: $primary;
+      color: white;
+      cursor: pointer;
+    }
+    display: flex;
+    form {
+      flex: 1;
+    }
     .input-group {
       background-color: blue;
       width: 100%;
