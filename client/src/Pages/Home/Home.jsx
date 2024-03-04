@@ -6,7 +6,7 @@ import { socket } from "../../utils/helper";
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("username"));
   const navigate = useNavigate();
-  const [username, setUsername] = useState("esco");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
