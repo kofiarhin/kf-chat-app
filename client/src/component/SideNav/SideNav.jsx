@@ -1,8 +1,9 @@
 import "./sidenav.styles.scss";
 import { IoMdClose } from "react-icons/io";
 import UsersList from "../UsersList/UsersList";
-const SideNav = ({ setShowSideNav, showSideNav, users }) => {
-
+import { useSelector } from "react-redux";
+const SideNav = ({ setShowSideNav, showSideNav }) => {
+  const { users } = useSelector((state) => state.user);
   return (
     <div id="sidenav" className={`${showSideNav ? "show" : null}`}>
       <div className="content-wrapper">

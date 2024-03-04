@@ -1,5 +1,4 @@
 const UsersList = ({ data }) => {
-  console.log("xxxx", data);
   return (
     <div>
       <h1 className="heading">Users</h1>

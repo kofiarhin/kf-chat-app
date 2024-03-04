@@ -2,35 +2,28 @@ import "./home.styles.scss";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { socket } from "../../utils/helper";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, reset } from "../../redux/user/userSlice";
+import { checkUser } from "../../utils/request";
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("username"));
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
+  const { isSuccess } = useSelector((state) => state.user);
 
   useEffect(() => {
     // check if user already exist
-  }, [socket]);
+    if (isSuccess) {
+      navigate("/chatroom");
+      dispatch(reset());
+    }
+  }, [isSuccess]);
 
   const handleChange = (e) => {
     setUsername(e.target.value);
-  };
-
-  const checkUser = async (username) => {
-    try {
-      const res = await fetch(`/checkUser`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({ username }),
-      });
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.log(error.message);
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -48,9 +41,7 @@ const Home = () => {
       return;
     }
     setError("");
-    localStorage.setItem("username", JSON.stringify(username));
-    socket.emit("join", username);
-    navigate("/chatroom");
+    dispatch(loginUser(username));
   };
   return (
     <div id="home">

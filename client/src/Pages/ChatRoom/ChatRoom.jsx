@@ -5,45 +5,52 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MessageList from "../../component/MessageList/MessageList";
 import SideNav from "../../component/SideNav/SideNav";
+import { logoutUser, reset, setUsers } from "../../redux/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { setMessages } from "../../redux/message/messageSlice";
 
 const ChatRoom = () => {
   const navigate = useNavigate();
-
-  const [username, setUsername] = useState("");
+  const dispatch = useDispatch();
+  const { isSuccess, username, users } = useSelector((state) => state.user);
+  const { messages } = useSelector((state) => state.message);
+  // const [username, setUsername] = useState("");
   const [text, setText] = useState("");
-  const [users, setUsers] = useState(0);
-  const [messages, setMessages] = useState([]);
   const [counter, setCounter] = useState(0);
   const [info, setInfo] = useState("");
   const [typingInfo, setTypingInfo] = useState("");
   const [showSideNav, setShowSideNav] = useState(false);
 
+  // when user logs out
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+      dispatch(reset());
+    }
+  }, [isSuccess]);
+
   // runs once
   useEffect(() => {
-    // check if user is logged in
-    const username = JSON.parse(localStorage.getItem("username"));
+    // // check if user is logged in
+    // const username = JSON.parse(localStorage.getItem("username"));
     socket.emit("refresh_user", username);
-  }, []);
 
-  useEffect(() => {}, []);
-
-  useEffect(() => {
-    const username = JSON.parse(localStorage.getItem("username"));
-    setUsername(username);
+    // get messages
+    socket.emit("get_messages");
   }, []);
 
   useEffect(() => {
     socket.on("users", (data) => {
-      setUsers(data);
+      // get users
+      dispatch(setUsers(data));
     });
 
     socket.on("receive_message", (data) => {
-      setMessages(data);
+      dispatch(setMessages(data));
     });
 
     socket.on("new_user", (username) => {
       setInfo(`${username} just joined`);
-
       setTimeout(() => {
         setInfo("");
       }, 8000);
@@ -66,9 +73,7 @@ const ChatRoom = () => {
   }, [socket]);
 
   const handleLeave = () => {
-    localStorage.removeItem("username");
-    socket.emit("leave", username);
-    navigate("/");
+    dispatch(logoutUser(username));
   };
 
   const handleChange = (e) => {
@@ -89,11 +94,7 @@ const ChatRoom = () => {
   return (
     // chat-wrapper
     <div className="chat-wrapper">
-      <SideNav
-        setShowSideNav={setShowSideNav}
-        showSideNav={showSideNav}
-        users={users}
-      />
+      <SideNav setShowSideNav={setShowSideNav} showSideNav={showSideNav} />
       <div className="container">
         <header className="header-wrapper">
           {/* <p className="num-users">Users({users})</p> */}
